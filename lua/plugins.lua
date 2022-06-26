@@ -5,15 +5,13 @@ vim.cmd([[
   augroup end
 ]])
 return require('packer').startup(function()
-	use {'neoclide/coc.nvim', branch = 'release'}
-  	use 'wbthomason/packer.nvim'
+--	use {'neoclide/coc.nvim', branch = 'release'}
+  	use 'neovim/nvim-lspconfig'
+	use {'ms-jpq/coq_nvim', branch = 'coq'}
+	use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
+
+	use 'wbthomason/packer.nvim'
 	use 'navarasu/onedark.nvim'
-	use {
-	    'kyazdani42/nvim-tree.lua',
-	    requires = {
-	      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-	    }
-	}
 	use {
 	  'nvim-lualine/lualine.nvim',
 	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -22,4 +20,6 @@ return require('packer').startup(function()
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate'
 	}
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-telescope/telescope.nvim'
 end)
