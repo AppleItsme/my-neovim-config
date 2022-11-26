@@ -18,8 +18,8 @@ if !exists('g:vscode')
 
 
 	let g:c_syntax_for_h = 1
-	colorscheme astron
-
+	colorscheme gruvbox
+	
 	set mouse=a
 	set completeopt=menu,menuone,noselect
 endif

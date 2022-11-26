@@ -6,7 +6,7 @@ vim.cmd([[
 ]])
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
-	use "bryant-the-coder/astron.nvim"
+	use "ellisonleao/gruvbox.nvim"
 	use {
 	  'saadparwaiz1/cmp_luasnip',
 	  requires = {
@@ -51,5 +51,6 @@ return require('packer').startup(function()
 	      		"MunifTanjim/nui.nvim",
 	    	}
 	}
+	use "alaviss/nim.nvim"
 end)
 

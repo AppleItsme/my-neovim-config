@@ -137,7 +137,7 @@ sources = cmp.config.sources({
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require("nvim-lsp-installer").setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
     ui = {
@@ -149,10 +149,11 @@ require("nvim-lsp-installer").setup({
     }
 })
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['clangd'].setup {
-	capabilities = capabilities
-} 
-
-require('lspconfig')['rust_analyzer'].setup {
-	capabilities = capabilities
-} 
+require'lspconfig'.clangd.setup{}
+require'lspconfig'.rust_analyzer.setup{} 
+require'lspconfig'.nimls.setup{}
+require'lspconfig'.svelte.setup{}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.cmake.setup{}
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.zls.setup{}
