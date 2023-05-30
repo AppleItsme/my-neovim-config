@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "cpp", "lua", "rust", "json", "zig", "norg" },
+  ensure_installed = { "c", "cpp", "lua", "rust", "json", "zig", "python" },
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
@@ -11,6 +11,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
   },
 }
+
 
 require('lualine').get_config()
 require('lualine').setup()
@@ -75,6 +76,8 @@ require('lualine').setup {
 }
 
 
+vim.keymap.set('', 't', '<cmd>Telescope<cr>')
+
 local cmp = require'cmp'
 
 cmp.setup({
@@ -88,8 +91,8 @@ snippet = {
   end,
 },
 window = {
-  -- completion = cmp.config.window.bordered(),
-  -- documentation = cmp.config.window.bordered(),
+  completion = cmp.config.window.bordered(),
+  documentation = cmp.config.window.bordered(),
 },
 mapping = cmp.mapping.preset.insert({
   ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -136,8 +139,12 @@ sources = cmp.config.sources({
 })
 })
 
+require("mason").setup()
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup()
+
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require("nvim-lsp-installer").setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
     ui = {
@@ -148,12 +155,12 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require'lspconfig'.clangd.setup{}
-require'lspconfig'.rust_analyzer.setup{} 
-require'lspconfig'.nimls.setup{}
-require'lspconfig'.svelte.setup{}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.cmake.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.zls.setup{}
+mason_lspconfig.setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function (server_name) -- default handler (optional)
+        require("lspconfig")[server_name].setup {}
+    end,
+}
+

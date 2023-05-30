@@ -7,18 +7,17 @@ if !exists('g:vscode')
 	set ts=4 
 	set sw=4
 
+	set wildchar=<C-q>
+
 	nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 	nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 	nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 	nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-	inoremap <silent><expr> <c-space> coc#refresh()
-		
+	
 	set clipboard+=unnamedplus
 
-
 	let g:c_syntax_for_h = 1
-	colorscheme gruvbox
+	colorscheme no-clown-fiesta
 	
 	set mouse=a
 	set completeopt=menu,menuone,noselect

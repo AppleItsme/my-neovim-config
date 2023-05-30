@@ -7,6 +7,12 @@ vim.cmd([[
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use "ellisonleao/gruvbox.nvim"
+	use 'ful1e5/onedark.nvim'
+	use 'aktersnurra/no-clown-fiesta.nvim'
+	use "marko-cerovac/material.nvim"
+	use 'Shatur/neovim-ayu'
+	use 'rose-pine/neovim'
+	use 'folke/tokyonight.nvim'
 	use {
 	  'saadparwaiz1/cmp_luasnip',
 	  requires = {
@@ -51,6 +57,9 @@ return require('packer').startup(function()
 	      		"MunifTanjim/nui.nvim",
 	    	}
 	}
-	use "alaviss/nim.nvim"
+    use {
+		"williamboman/mason.nvim",
+    	"williamboman/mason-lspconfig.nvim"
+	}
 end)
 
