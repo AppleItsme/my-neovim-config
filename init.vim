@@ -15,3 +15,5 @@ let g:c_syntax_for_h = 1
 set mouse=a
 set completeopt=menu,menuone,noselect
 set wildchar=<C-q>
+
+colorscheme habamax
