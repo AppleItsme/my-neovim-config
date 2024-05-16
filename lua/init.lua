@@ -27,16 +27,16 @@ require("lazy").setup({
 	"nvim-telescope/telescope.nvim",
 	"nvim-lua/plenary.nvim",
 	"s1n7ax/nvim-window-picker",
+	"ellisonleao/gruvbox.nvim",
 	"nvim-neo-tree/neo-tree.nvim",
 	"MunifTanjim/nui.nvim",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
-	"navarasu/onedark.nvim"
 })
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "cpp", "lua", "rust", "json", "zig", "python" },
+  ensure_installed = { "c", "cpp", "lua", "json", "zig", "python", "glsl" },
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
@@ -191,12 +191,19 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
+
 mason_lspconfig.setup_handlers {
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function (server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup {}
+		if server_name == "clangd" then
+			require("lspconfig")[server_name].setup {
+				cmd = {"clangd", "--header-insertion=never"}
+			}
+		else
+        	require("lspconfig")[server_name].setup {}
+		end
     end,
+	require("lspconfig")["glsl_analyzer"].setup{}
 }
-

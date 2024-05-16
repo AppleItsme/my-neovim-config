@@ -16,4 +16,5 @@ set mouse=a
 set completeopt=menu,menuone,noselect
 set wildchar=<C-q>
 
-colorscheme habamax
+colorscheme gruvbox
+Neotree
